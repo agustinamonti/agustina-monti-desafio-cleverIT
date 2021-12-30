@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "6ebc194d-f19e-4556-91e0-c3abcbc0f1ac",
+		"name": "JSONPlaceholder - Comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - Comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointComments}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointComments}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Comment Not Found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/comment",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Specific Comment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add a Comment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"postId\": 1,\r\n    \"name\": \"agustina\",\r\n    \"email\": \"agusmonti10@gmail.com\",\r\n    \"body\": \"laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

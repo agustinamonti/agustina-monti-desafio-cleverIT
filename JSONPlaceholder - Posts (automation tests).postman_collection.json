@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "1eb98d0a-ff0f-46da-8cf6-b119ef5cc24f",
+		"name": "JSONPlaceholder - Posts (automation tests)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validar que el Status code sea 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La estructura de los posts debe ser la correcta\", function(){\r",
+							"    jsonData.forEach(function(post) {\r",
+							"        pm.expect(post.userId).to.exist;\r",
+							"        pm.expect(post.id).to.exist;\r",
+							"        pm.expect(post.title).to.exist;\r",
+							"        pm.expect(post.body).to.exist;\r",
+							"    })\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tiempo de respuesta debe ser menor a 500\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Post Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar que el status code sea 404 al ingresar EndPoint incorrecto\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/post",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Specific Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validar que trae el post correcto especificado\", () => {\r",
+							"  pm.expect(jsonData.userId).to.equal(1);\r",
+							"  pm.expect(jsonData.id).to.equal(1);\r",
+							"  pm.expect(jsonData.title).to.equal(\"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\");\r",
+							"  pm.expect(jsonData.body).to.equal(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add a Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validar que el status code sea 201 Created\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							" pm.test(\"Validamos que se crea correctamente un nuevo post\", function() {\r",
+							"    pm.expect(jsonData.userId).to.exist;\r",
+							"    pm.expect(jsonData.userId).to.equal(11);\r",
+							"    pm.expect(jsonData.title).to.exist;\r",
+							"    pm.expect(jsonData.title).to.equal(\"test Agustina\");\r",
+							"    pm.expect(jsonData.body).to.exist;\r",
+							"    pm.expect(jsonData.body).to.equal(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");\r",
+							"    pm.expect(jsonData.id).to.exist;\r",
+							" })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 11,\r\n    \"title\": \"test Agustina\",\r\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Update a Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validar que el Status code sea 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							" pm.test(\"Validamos que se actualiza correctamente el post especificado\", function() {\r",
+							"    pm.expect(jsonData.userId).to.exist;\r",
+							"    pm.expect(jsonData.userId).to.equal(1);\r",
+							"    pm.expect(jsonData.title).to.exist;\r",
+							"    pm.expect(jsonData.title).to.equal(\"updated post\");\r",
+							"    pm.expect(jsonData.body).to.exist;\r",
+							"    pm.expect(jsonData.body).to.equal(\"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\");\r",
+							"    pm.expect(jsonData.id).to.equal(1);\r",
+							" })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"title\": \"updated post\",\r\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Delete a post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validar que el Status code sea 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validamos que se elimina correctamente el post especificado\", function() {\r",
+							"    pm.expect(jsonData).to.eql({});\r",
+							" })\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{endPointPosts}}/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointPosts}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

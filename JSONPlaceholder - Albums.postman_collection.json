@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "2194838e-d021-4beb-99fc-8c347d48fa5b",
+		"name": "JSONPlaceholder - Albums",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - Albums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointAlbums}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointAlbums}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Albums Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/album",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"album"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Specific Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{endPointAlbums}}/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointAlbums}}",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add a Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"title\": \"Album test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{endPointAlbums}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{endPointAlbums}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
